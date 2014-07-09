@@ -42,6 +42,8 @@ public:
 
     void setOffset(size_t offset);
 
+    void skip(size_t offset);
+
     size_t getOffset() const;
 
     size_t size() const;

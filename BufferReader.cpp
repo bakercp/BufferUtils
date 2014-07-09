@@ -55,10 +55,17 @@ void BufferReader::setOffset(size_t offset)
 }
 
 
+void BufferReader::skip(size_t offset)
+{
+    if (_offset + offset < _size) _offset += offset;
+}
+
+
 size_t BufferReader::getOffset() const
 {
     return _offset;
 }
+
 
 size_t BufferReader::size() const
 {
