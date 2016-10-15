@@ -23,57 +23,54 @@
 // =============================================================================
 
 
-#include "BufferReader.h"
+#pragma once
 
 
-BufferReader::BufferReader(const uint8_t* data, size_t size, size_t offset):
-    _data(data),
-    _size(size),
-    _offset(offset)
+#include "Arduino.h"
+
+
+class BufferWriter
 {
+public:
+    BufferWriter(uint8_t* data, size_t size, size_t offset = 0);
+
+    template <typename Type>
+    size_t write(const Type& data);
+
+    template <typename Type>
+    size_t write(const Type* data, size_t size);
+
+    void setOffset(size_t offset);
+    size_t getOffset() const;
+
+    size_t size() const;
+
+    size_t remaining() const;
+
+private:
+    BufferWriter(const BufferWriter& that);
+    BufferWriter& operator = (const BufferWriter& that);
+
+    size_t _write(const void* source, size_t size);
+
+    uint8_t* _data;
+
+    const size_t _size;
+
+    size_t _offset;
+
+};
+
+
+template <typename Type>
+size_t BufferWriter::write(const Type& data)
+{
+    return _write(&data, sizeof(Type));
 }
 
 
-size_t BufferReader::_read(void* destination, size_t size) const
+template <typename Type>
+size_t BufferWriter::write(const Type* data, size_t size)
 {
-    if(_offset + size <= _size)
-    {
-        memcpy(destination, _data + _offset, size);
-        _offset += size;
-        return size;
-    }
-    else
-    {
-        return 0;
-    }
-}
-
-
-void BufferReader::setOffset(size_t offset)
-{
-    if (offset < _size) _offset = offset;
-}
-
-
-void BufferReader::skip(size_t offset)
-{
-    if (_offset + offset < _size) _offset += offset;
-}
-
-
-size_t BufferReader::getOffset() const
-{
-    return _offset;
-}
-
-
-size_t BufferReader::size() const
-{
-    return _size;
-}
-
-
-size_t BufferReader::remaining() const
-{
-    return _size - _offset;
+    return _write(data, sizeof(Type) * size);
 }

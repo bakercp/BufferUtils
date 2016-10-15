@@ -9,9 +9,10 @@ uint8_t buffer[bufferSize];
 void setup()
 {
     // Set the buffer to zero.
-    memset(buffer, 0, sizeof(buffer)); 
+    memset(buffer, 0, sizeof(buffer));
 
     Serial.begin(115200);
+    delay(1000);
     Serial.println();
     Serial.println();
     Serial.println();
