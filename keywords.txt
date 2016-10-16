@@ -1,0 +1,36 @@
+#######################################
+# Syntax Coloring Map For Arduration
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+RingBuffer_	KEYWORD1
+RingBuffer	KEYWORD1
+Status	KEYWORD1
+BufferWriter	KEYWORD1
+BufferReader	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+put	KEYWORD2
+get	KEYWORD2
+count	KEYWORD2
+size	KEYWORD2
+full	KEYWORD2
+empty	KEYWORD2
+clear	KEYWORD2
+
+setOffset	KEYWORD2
+getOffset	KEYWORD2
+write	KEYWORD2
+remaining	KEYWORD2
+
+skip	KEYWORD2
+read	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
