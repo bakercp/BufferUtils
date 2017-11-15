@@ -1,3 +1,10 @@
+//
+// Copyright (c) 2013 Christopher Baker <https://christopherbaker.net>
+//
+// SPDX-License-Identifier:	MIT
+//
+
+
 #include <BufferReader.h>
 #include <BufferWriter.h>
 
@@ -19,17 +26,23 @@ void setup()
 
     BufferWriter writer(buffer, bufferSize);
 
+    Serial.println(writer.remaining() == bufferSize ? "PASS" : "FAIL");
+
     while (writer.remaining())
     {
-        Serial.print("Offset: ");
+        Serial.print("Remaining: ");
+        Serial.print(writer.remaining());
+        Serial.print(" Offset: ");
         Serial.print(writer.getOffset());
 
         uint8_t value = writer.remaining();
-
+        value *= value;
         size_t size = writer.write(value);
 
         Serial.print(" Bytes Written: ");
         Serial.print(size);
+        Serial.print(" ");
+        Serial.print(size == sizeof(uint8_t) ? "PASS" : "FAIL");
         Serial.print(" Value: ");
         Serial.print(value);
         Serial.print(" Offset: ");
@@ -37,35 +50,42 @@ void setup()
         Serial.println();
     }
 
+    size_t size = writer.write(255);
+    Serial.print("Fail-write: ");
+    Serial.println(size == 0 ? "PASS" : "FAIL");
+
+    Serial.print("Remaining: ");
+    Serial.println(writer.remaining());
+
+    writer.setOffset(bufferSize - 1);
+
+    Serial.print("Remaining: ");
+    Serial.println(writer.remaining());
+
+    Serial.print("sizeof(255) = ");
+    Serial.println(sizeof(255));
+
+    size = writer.write(uint8_t(255));
+    Serial.print(" ");
+    Serial.print(size);
+    Serial.print(" Success-write: ");
+    Serial.println(size == sizeof(uint8_t) ? "PASS" : "FAIL");
+
+    writer.setOffset(bufferSize - 1);
+    size = writer.write(256);
+    Serial.print("Fail-write: ");
+    Serial.println(size == 0 ? "PASS" : "FAIL");
+
+    Serial.print("Remaining: ");
+    Serial.println(writer.remaining());
+
     BufferReader reader(buffer, bufferSize);
 
-    while (reader.remaining())
-    {
-        uint16_t value;
-
-        Serial.print("Offset: ");
-        Serial.print(reader.getOffset());
-        Serial.print(" Value: ");
-
-        if (reader.read(value))
-        {
-            Serial.print(value);
-        }
-        else
-        {
-            Serial.print("Error");
-            break;
-        }
-
-        Serial.print(" Offset: ");
-        Serial.print(reader.getOffset());
-
-        Serial.println();
-    }
+    Serial.println(reader.remaining() == bufferSize ? "PASS" : "FAIL");
 }
 
 
 void loop()
 {
-
+    delay(1000);
 }
