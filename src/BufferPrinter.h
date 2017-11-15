@@ -66,7 +66,10 @@ public:
     size_t remaining() const;
 
     /// \brief An error that is set if the write operation will exceed the size of the wrapped buffer.
-    static const int ERROR_OUT_OF_MEMORY = 2;
+    enum
+    {
+        ERROR_OUT_OF_MEMORY = 2
+    };
 
 private:
     BufferPrinter(const BufferPrinter& rhs);
