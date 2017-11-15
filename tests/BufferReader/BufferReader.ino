@@ -13,7 +13,7 @@ test(sizes)
 
     for (size_t i = 0; i < bufferSize; ++i)
     {
-        size_t n = writer.write(uint8_t(i);
+        size_t n = writer.write(uint8_t(i));
         assertEqual(n, sizeof(uint8_t));
     }
 
