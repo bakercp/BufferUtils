@@ -45,7 +45,7 @@ public:
     size_t write(const uint8_t* valueArray, size_t size) override;
 
     /// \returns the number of bytes that can be written without blocking.
-    int availableForWrite() override;
+    int availableForWrite();
 
     /// \brief Set the write offset to the given position.
     /// \param offset The read offset position within the byte buffer.
