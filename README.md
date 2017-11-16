@@ -11,7 +11,7 @@ An Arduino library to facilitate working with raw byte arrays.
 
 - Javascript `DataView` style byte buffer access for reading (`BufferReader`) and writing (`BufferWriter`).
 - A `Print` interface for a raw byte buffer via `BufferPrinter`
-- A ring buffer implementation for data arrays of any type in `RingBuffer`.
+- A circular buffer (aka ring buffer or cyclic buffer) implementation for data arrays of any type in `CircularBuffer`.
 
 ## Background
 
@@ -110,9 +110,9 @@ printer.print(99, HEX);
 Serial.write(bufferToFill, printer.getOffset());
 ```
 
-### RingBuffer
+### CircularBuffer
 
-See the `RingBuffer` example.
+See the `CircularBuffer` example.
 
 ## Examples
 

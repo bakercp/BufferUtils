@@ -11,10 +11,14 @@
 #include "Arduino.h"
 
 
-/// \brief A templated class representing ring-buffer-style access to an array.
+/// \brief A templated class representing circular access to an array.
+///
+/// Circular buffers are also known as ring buffers or cyclic buffers.
+///
 /// \tparam Type The data type of the wrapped array.
+/// \sa https://en.wikipedia.org/wiki/Circular_buffer
 template <typename Type>
-class RingBuffer_
+class CircularBuffer_
 {
 public:
     /// \brief The possible return status after get, put, and peek operations.
@@ -34,10 +38,10 @@ public:
         STATUS_INVALID
     };
 
-    /// \brief Create a ring buffer from the given data.
+    /// \brief Create a circular buffer from the given data.
     /// \param data A pointer to the data buffer to wrap.
     /// \param size The number of bytes in the data buffer.
-    RingBuffer_(Type* data, size_t size):
+    CircularBuffer_(Type* data, size_t size):
         _data(data),
         _size(size),
         _head(0),
@@ -132,13 +136,13 @@ public:
         }
     }
 
-    /// \returns the nuber of items available in the ring buffer.
+    /// \returns the nuber of items available in the circular buffer.
     size_t count() const
     {
         return _count;
     }
 
-    /// \returns the total capacity of the ring buffer.
+    /// \returns the total capacity of the circular buffer.
     size_t size() const
     {
         return _size;
@@ -156,7 +160,7 @@ public:
         return _count == 0;
     }
 
-    /// \brief Effectively reset the ring buffer.
+    /// \brief Effectively reset the circular buffer.
     ///
     /// The underlying data will not be zeroed, but the head and tail will be
     /// reset.
@@ -173,8 +177,8 @@ public:
     }
 
 private:
-    RingBuffer_(const RingBuffer_& that);
-    RingBuffer_& operator = (const RingBuffer_& that);
+    CircularBuffer_(const CircularBuffer_& that);
+    CircularBuffer_& operator = (const CircularBuffer_& that);
 
     // A pointer to the backing byte buffer.
     Type* _data = nullptr;
@@ -190,5 +194,5 @@ private:
 
 };
 
-/// \brief A type definition for a standard 8-bit ring buffer.
-typedef RingBuffer_<uint8_t> RingBuffer;
+/// \brief A type definition for a standard 8-bit circular buffer.
+typedef CircularBuffer_<uint8_t> CircularBuffer;

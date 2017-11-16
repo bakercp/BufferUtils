@@ -51,20 +51,6 @@ test(sizes)
         reader.read(l); // The high byte comes first in little endian.
         reader.read(h); // The low byte comes second in little endian.
 
-        // Serial.print("h: ");
-        // Serial.print(h);
-        // Serial.print("(");
-        // Serial.print(h, BIN);
-        // Serial.print(") l: ");
-        // Serial.print(l);
-        // Serial.print("(");
-        // Serial.print(l, BIN);
-        // Serial.print(") w: ");
-        // Serial.print(w);
-        // Serial.print("(");
-        // Serial.print(w, BIN);
-        // Serial.println(")");
-
         assertEqual(word(h, l), w);
     }
 

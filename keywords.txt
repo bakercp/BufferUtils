@@ -5,8 +5,8 @@
 #######################################
 # Datatypes (KEYWORD1)
 #######################################
-RingBuffer_	KEYWORD1
-RingBuffer	KEYWORD1
+CircularBuffer_	KEYWORD1
+CircularBuffer	KEYWORD1
 Status	KEYWORD1
 BufferWriter	KEYWORD1
 BufferReader	KEYWORD1
@@ -34,3 +34,11 @@ read	KEYWORD2
 #######################################
 # Constants (LITERAL1)
 #######################################
+
+STATUS_OK	LITERAL1
+STATUS_OVERFLOW	LITERAL1
+STATUS_UNDERFLOW	LITERAL1
+STATUS_INVALID	LITERAL1
+
+ERROR_OUT_OF_MEMORY	LITERAL1
+
