@@ -4,10 +4,22 @@ before_install:
   - source <(curl -SLs https://raw.githubusercontent.com/bakercp/travis-ci-arduino/master/install.sh)
 install:
   - arduino --install-library "ArduinoUnit"
+  - apt install doxygen
 script:
   - build_main_platforms
+  - cd docs
+  - doxygen Doxyfile
 notifications:
   email:
     on_success: change
     on_failure: change
-
+deploy:
+  provider: pages
+  skip_cleanup: true
+  local_dir: docs/html/
+  target_branch: gh-pages
+  name: Christopher Baker
+  email: info@christopherbaker.net
+  github_token: $GITHUB_TOKEN # Set in travis-ci.org dashboard
+  on:
+    branch: master
