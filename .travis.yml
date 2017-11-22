@@ -2,7 +2,12 @@ language: c
 sudo: false
 before_install:
   - sudo apt-get -qq update
-  - sudo apt-get install -y doxygen doxygen-doc doxygen-latex doxygen-gui graphviz
+  # - sudo apt-get install -y doxygen doxygen-doc doxygen-latex doxygen-gui graphviz
+  - sudo apt-get install -y curl
+  - export DOXYGEN_VERSION=1.8.13
+  - curl -LO "http://ftp.stack.nl/pub/users/dimitri/doxygen-$DOXYGEN_VERSION.linux.bin.tar.gz"
+  - tar xvf doxygen-$DOXYGEN_VERSION.linux.bin.tar.gz
+  - export PATH=$PATH:$TRAVIS_BUILD_DIR/doxygen-$DOXYGEN_VERSION/bin
   - source <(curl -SLs https://raw.githubusercontent.com/bakercp/travis-ci-arduino/master/install.sh)
 install:
   - arduino --install-library "ArduinoUnit"
@@ -17,7 +22,7 @@ notifications:
 deploy:
   provider: pages
   skip_cleanup: true
-  local_dir: $TRAVIS_BUILD_DIR/docs/html
+  local_dir: $TRAVIS_BUILD_DIR/docs/html/
   target_branch: gh-pages
   name: Christopher Baker
   email: info@christopherbaker.net
