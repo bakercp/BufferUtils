@@ -2,7 +2,7 @@ language: c
 sudo: false
 before_install:
   - sudo apt-get -qq update
-  - sudo apt-get install -y doxygen
+  - sudo apt-get install -y doxygen doxygen-doc doxygen-latex doxygen-gui graphviz
   - source <(curl -SLs https://raw.githubusercontent.com/bakercp/travis-ci-arduino/master/install.sh)
 install:
   - arduino --install-library "ArduinoUnit"
@@ -17,7 +17,7 @@ notifications:
 deploy:
   provider: pages
   skip_cleanup: true
-  local_dir: docs/html
+  local_dir: $TRAVIS_BUILD_DIR/docs/html
   target_branch: gh-pages
   name: Christopher Baker
   email: info@christopherbaker.net
