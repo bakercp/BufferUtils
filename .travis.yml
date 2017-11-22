@@ -17,7 +17,7 @@ notifications:
 deploy:
   provider: pages
   skip_cleanup: true
-  local_dir: docs/html/
+  local_dir: docs/html
   target_branch: gh-pages
   name: Christopher Baker
   email: info@christopherbaker.net
