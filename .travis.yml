@@ -1,10 +1,11 @@
 language: c
 sudo: false
 before_install:
+  - sudo apt-get -qq update
+  - sudo apt-get install -y doxygen
   - source <(curl -SLs https://raw.githubusercontent.com/bakercp/travis-ci-arduino/master/install.sh)
 install:
   - arduino --install-library "ArduinoUnit"
-  - apt install doxygen
 script:
   - build_main_platforms
   - cd docs
